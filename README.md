@@ -25,22 +25,39 @@ The idea is simple: not every task needs a GitHub Issue. An idea, an epic, a dec
 | Operation | What happens |
 |---|---|
 | **Create** | Adds a new task to your Notion database |
-| **Graduate** | Opens a GitHub Issue from a Notion task, links them, marks Notion task In Progress |
-| **Close** | Closes the GitHub Issue, marks the Notion task Done |
+| **Graduate** | Opens a GitHub Issue from a Notion task and links them. Can be called multiple times to break a task into several issues (epic model). |
+| **Close** | Closes a GitHub Issue. Marks the Notion task Done only when every linked issue is closed. |
 | **Setup** | One-time wizard that configures your Notion database and default GitHub repo |
 
-#### The graduation workflow
+#### Simple task workflow
 
 ```
 Notion task (idea / planning)
         │
-        │  you say: "graduate this task" or "this needs a GitHub issue"
+        │  "graduate this task"
         ▼
-GitHub Issue (code work begins)
+GitHub Issue opened, Notion → In Progress
         │
-        │  PR merged / work accepted
+        │  PR merged
         ▼
-Issue closed + Notion task marked Done
+Issue closed, Notion → Done
+```
+
+#### Epic workflow (one task, many issues)
+
+```
+Notion task / epic (planning)
+        │
+        │  "graduate this task"          → GitHub Issue #1 opened
+        │  "graduate this task again"    → GitHub Issue #2 opened
+        │  "graduate this task"          → GitHub Issue #3 opened
+        ▼
+Notion task stays In Progress until all issues are closed
+        │
+        │  Issues #1, #2 closed...
+        │  Issue #3 closed  ← last one
+        ▼
+Notion task → Done
 ```
 
 At each transition, Claude announces a named checkpoint so the sync is visible and auditable — not silent background work.

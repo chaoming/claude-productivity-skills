@@ -29,6 +29,18 @@ Choose GitHub.com, HTTPS, and authenticate via browser. Verify with:
 gh auth status
 ```
 
+## Setting up the GitHub Issues field in Notion
+
+The `github_issues_field` must be a **Text** (or Rich Text) property in Notion — not a URL property. This is because a URL property holds only one value, while a text property can store multiple issue URLs (one per line) for epics.
+
+To add the property to your Notion database:
+1. Open your tasks database.
+2. Click `+` to add a new property.
+3. Choose **Text** as the type.
+4. Name it `GitHub Issues` (or whatever you told the setup wizard).
+
+Leave it empty — the skill populates it automatically when you graduate tasks.
+
 ## Adding `.task-management.json` to `.gitignore`
 
 If you don't want to commit your Notion database ID:
