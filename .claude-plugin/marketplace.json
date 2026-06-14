@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "General-purpose productivity skills for Claude Code — workflow methodologies that work for any project or team.",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "plugins": [
     {
       "name": "task-flow",
       "source": "./plugins/task-flow",
       "description": "Notion + GitHub task lifecycle management: setup wizard, task creation, graduation from planning to code, and status sync checkpoints.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "strict": true
     }
   ]
