@@ -91,7 +91,7 @@ Once installed, say any of these to Claude:
 "set up task management for this project"
 ```
 
-On first use in a new project, Claude runs a short setup wizard and writes a `.task-management.json` config file. Each subsequent use reads from that config — no repeated setup.
+On first use in a new project, Claude runs a short setup wizard and writes a `.claude/task-management.json` config file. Each subsequent use reads from that config — no repeated setup.
 
 ---
 

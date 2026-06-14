@@ -32,7 +32,7 @@ If either is missing, announce which is unavailable and fall back to manual inst
 
 ## Step 0 — Check setup
 
-Before any operation, look for `.task-management.json` in the project root.
+Before any operation, look for `.claude/task-management.json` in the project root.
 
 - **Found** → load config and proceed to the requested operation.
 - **Not found** → run the Setup Wizard before doing anything else.
@@ -89,7 +89,7 @@ Write config:
 }
 ```
 
-Confirm: *"Config saved to `.task-management.json`. Add this file to `.gitignore` if your Notion database ID is sensitive, or commit it if you want the whole team to share the same config."*
+Confirm: *"Config saved to `.claude/task-management.json`. You can commit this file if you want the whole team to share the same config, or add it to `.gitignore` if you'd rather keep your Notion database ID out of the repo."*
 
 ---
 

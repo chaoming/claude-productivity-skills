@@ -41,12 +41,12 @@ To add the property to your Notion database:
 
 Leave it empty — the skill populates it automatically when you graduate tasks.
 
-## Adding `.task-management.json` to `.gitignore`
+## Adding `.claude/task-management.json` to `.gitignore`
 
 If you don't want to commit your Notion database ID:
 
 ```bash
-echo ".task-management.json" >> .gitignore
+echo ".claude/task-management.json" >> .gitignore
 ```
 
 If you want the whole team to share the same config, commit the file instead — the database ID is not a secret, just an identifier.
