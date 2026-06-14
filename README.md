@@ -25,40 +25,42 @@ The idea is simple: not every task needs a GitHub Issue. An idea, an epic, a dec
 | Operation | What happens |
 |---|---|
 | **Create** | Adds a new task to your Notion database |
-| **Graduate** | Opens a GitHub Issue from a Notion task and links them. Can be called multiple times to break a task into several issues (epic model). |
-| **Close** | Closes a GitHub Issue. Marks the Notion task Done only when every linked issue is closed. |
+| **Graduate** | Three-phase flow: Claude plans the issue breakdown, writes a checklist to the Notion page, waits for your approval, then creates all GitHub Issues automatically |
+| **Close** | Checks all linked issues, presents a completion summary, and waits for your verification before marking the Notion task Done |
 | **Setup** | One-time wizard that configures your Notion database and default GitHub repo |
 
-#### Simple task workflow
+#### The workflow
 
 ```
 Notion task (idea / planning)
         │
         │  "graduate this task"
         ▼
-GitHub Issue opened, Notion → In Progress
+Phase 1 — Plan
+  Claude reads the task, enters plan mode,
+  proposes a breakdown (1 or many issues),
+  writes checklist to the Notion page
         │
-        │  PR merged
+        │  you review and approve
         ▼
-Issue closed, Notion → Done
-```
-
-#### Epic workflow (one task, many issues)
-
-```
-Notion task / epic (planning)
+Phase 2 — Execute (automatic)
+  Claude creates all GitHub Issues
+  Links each one back to the Notion task
+  Notion task → In Progress
         │
-        │  "graduate this task"          → GitHub Issue #1 opened
-        │  "graduate this task again"    → GitHub Issue #2 opened
-        │  "graduate this task"          → GitHub Issue #3 opened
+        │  PRs merged, work done
+        │  "close task"
         ▼
-Notion task stays In Progress until all issues are closed
+Phase 3 — Verify
+  Claude checks all linked issues
+  Presents completion summary
         │
-        │  Issues #1, #2 closed...
-        │  Issue #3 closed  ← last one
+        │  you approve
         ▼
 Notion task → Done
 ```
+
+Claude decides whether a task needs one issue or ten — you don't have to specify upfront. The checklist on the Notion page is the living plan: items appear when planned, get issue numbers when created, and get checked off when closed.
 
 At each transition, Claude announces a named checkpoint so the sync is visible and auditable — not silent background work.
 
