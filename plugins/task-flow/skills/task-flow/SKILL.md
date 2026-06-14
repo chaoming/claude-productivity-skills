@@ -131,32 +131,28 @@ Steps:
    - Is this one focused piece of work, or does it span multiple concerns (e.g. schema + API + UI)?
    - What's the right level of granularity — small enough to ship in a PR, large enough to be meaningful?
 5. Produce a proposed breakdown: a numbered list of issues, each with a title and one-sentence description.
-6. Persist the plan to the Notion task page using `notion-create-comment`. This is the primary persistence mechanism — it works reliably across all Notion MCP setups and ensures the plan survives outside the AI conversation.
+6. Append the plan as a checklist to the bottom of the Notion task page using `notion-update-page` with `command: "insert_content"` and `position: {"type": "end"}`:
 
-   Format the comment as:
+   ```markdown
+   ## GitHub Issues Plan
 
-   ```
-   📋 GitHub Issues Plan
-
-   1. <Issue title> — <one-sentence description>
-   2. <Issue title> — <one-sentence description>
-   3. <Issue title> — <one-sentence description>
-
-   Status: Awaiting approval
+   - [ ] <Issue title> — <one-sentence description>
+   - [ ] <Issue title> — <one-sentence description>
+   - [ ] <Issue title> — <one-sentence description>
    ```
 
-   After posting the comment, also attempt to append the plan as a checklist block to the page body (below existing content) using whatever block-append tool is available. If block-level page updates are not supported by the MCP, skip silently — the comment is sufficient.
+   Before calling `insert_content`, read the Notion Markdown spec via `notion://docs/enhanced-markdown-spec` to ensure correct checkbox syntax.
 
 7. Present the plan to the user:
-   > *"I've planned X issues for this task and saved the plan as a comment on the Notion page. Here's the breakdown:*
+   > *"I've planned X issues for this task and added the checklist to the Notion page. Here's the breakdown:*
    > *1. Issue title — description*
    > *2. Issue title — description*
    >
-   > *Review the plan on the Notion page and let me know if you'd like to adjust anything, or approve to proceed."*
+   > *Review the checklist on the Notion page and let me know if you'd like to adjust anything, or approve to proceed."*
 
 8. **WAIT for user approval.** Do not create any GitHub Issues until the user explicitly approves.
 
-If the user requests changes, update the plan and the Notion checklist, then present the revised plan again.
+If the user requests changes, update the checklist on the Notion page using `notion-update-page` with `command: "update_content"` (search-and-replace the relevant lines), then present the revised plan again.
 
 ---
 
@@ -181,22 +177,13 @@ For each planned issue in order:
    ```
 2. Update the Notion task:
    - Append the new Issue URL to `github_issues_field` (one URL per line, preserve existing).
+   - Update the corresponding checklist item on the page using `notion-update-page` with `command: "update_content"`, replacing the plain item with the issue number and URL:
+     - old: `- [ ] <Issue title> — <description>`
+     - new: `- [ ] <Issue title> — #<N> <url>`
 3. Announce each issue as it is created: `"Created #<N>: <title>"`
 
 After all issues are created:
 - Set Notion task status to `in_progress`.
-- Post a follow-up comment on the Notion page via `notion-create-comment` to record the outcome:
-
-  ```
-  ✅ GitHub Issues created
-
-  1. <Issue title> — #<N> <url>
-  2. <Issue title> — #<N> <url>
-  3. <Issue title> — #<N> <url>
-
-  Status: In Progress
-  ```
-
 - Announce completion:
 
 ```
@@ -242,17 +229,10 @@ Steps:
    **Task Close checkpoint** — announce:
    > *"Task Close checkpoint — marking Notion task Done."*
 
-   - Set Notion task status to `done` via `notion-update-page`.
-   - Post a closing comment on the Notion page via `notion-create-comment`:
-
-     ```
-     🏁 Task complete
-
-     1. <Issue title> — #<N> <url> ✓
-     2. <Issue title> — #<N> <url> ✓
-
-     Status: Done
-     ```
+   - Set Notion task status to `done` via `notion-update-page` with `command: "update_properties"`.
+   - Check off each completed item in the checklist using `notion-update-page` with `command: "update_content"`:
+     - old: `- [ ] <Issue title> — #<N> <url>`
+     - new: `- [x] <Issue title> — #<N> <url>`
 
 ```
 Announcement: "Task Close checkpoint complete — Notion task marked Done."
