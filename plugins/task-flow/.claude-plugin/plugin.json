@@ -1,7 +1,7 @@
 {
   "name": "task-flow",
   "description": "Notion + GitHub task lifecycle management. Three skills: setup wizard to configure your project, task creation in Notion, and graduation (Notion → GitHub Issue) with automatic status sync checkpoints.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": {
     "name": "Chaoming Li",
     "url": "https://github.com/chaoming"

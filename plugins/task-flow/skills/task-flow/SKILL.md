@@ -1,15 +1,15 @@
 ---
 name: task-flow
 description: >
-  Manage the full task lifecycle across Notion (planning) and GitHub Issues (execution).
-  Use this skill when the user wants to create a task, graduate a task to GitHub, close
-  out completed work, or set up the Notion + GitHub workflow for the first time.
-  Every task goes through a Plan → Approve → Execute flow: Claude analyses the Notion
-  task, proposes an issue breakdown (one or many), writes a checklist to the Notion page,
-  waits for user approval, then creates all issues automatically.
-  Triggers: "create task", "add to Notion", "graduate task", "this needs GitHub issues",
-  "plan this task", "break this into issues", "close task", "mark done", "task complete",
-  "set up task management", "task-flow setup".
+  Manages the full task lifecycle across Notion (planning) and GitHub Issues (execution).
+  ALWAYS invoke this skill before starting any development work, feature, bug fix, or
+  content task — even if the user does not use task management vocabulary. Invoke when:
+  the user opens a session by describing work to be done ("I need to work on X",
+  "[Brand] feature name", "let's do X", "working on X today"); the user mentions a task,
+  story, epic, or ticket; the user says "start", "begin", or "let's work on" anything;
+  or the user asks to create, graduate, plan, close, or sync a task.
+  Do NOT let the session proceed to worktrees, code, or any implementation before this
+  skill has run and the user has approved a GitHub Issues plan.
 ---
 
 # task-flow
