@@ -41,7 +41,7 @@ Before any operation, look for `.claude/task-management.json` in the project roo
 
 ## Setup Wizard
 
-Run this once per project. At the end, write `.task-management.json` and confirm.
+Run this once per project. At the end, write `.claude/task-management.json` and confirm.
 
 Walk the user through these questions in order, one at a time:
 
